@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 
 const ArtDetail = () => {
@@ -20,6 +20,7 @@ const ArtDetail = () => {
     return (
         fullDetails ? 
             (<>
+                <Link to={`/`}>Back to Main Page</Link>
                 <h1>{fullDetails.title}</h1>
                 <p>{fullDetails.artist}</p>
                 <img src={fullDetails.image}></img>

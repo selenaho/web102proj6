@@ -10,7 +10,7 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] **Clicking on an item in the list view displays more details about it**
+- [X] **Clicking on an item in the list view displays more details about it**
   - Clicking on an item in the dashboard list navigates to a detail view for that item
   - Detail view includes extra information about the item not included in the dashboard view
   - The same sidebar is displayed in detail view as in dashboard view
@@ -50,6 +50,7 @@ GIF created with ScreenToGif
 ## Notes
 
 Describe any challenges encountered while building the app.
+- Preventing main page from taking time to reload when navigating from detailed page back to main page (used useOutletContext with Layout.jsx passing the data down to App.jsx rather than App.jsx remaking all the API calls to repopulate the data) 
 
 ## License
 
