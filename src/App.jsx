@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useOutletContext } from 'react-router-dom';
 import './App.css'
 import ArtInfo from '../Components/ArtInfo';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Label, Legend, ResponsiveContainer } from 'recharts';
 
 function App() {
   //const [list, setList] = useState([]);
@@ -10,42 +11,18 @@ function App() {
   const [filter, setFilter] = useState("");
   //const [cultures, setCultures] = useState(new Set());
 
+  const testData = [
+    {
+        culture: "China",
+        value: 50,
+    },
+    {
+        culture: "Japan",
+        value: 100,
+    },
+  ];
+
   const {list, cultures} = useOutletContext();
-
-//   const hasRun = useRef(false); //to see if useEffect has run already or not
-//   useEffect(() => {
-//     //console.log("Effect running...");
-//     //below two lines are to handle useEffect running twice
-//     if(hasRun.current) return;
-//     hasRun.current = true;
-
-//     const getAllArt = async () => {
-//         const response = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=6");
-//         const json = await response.json();
-//         const ids = json.objectIDs; //array of ids corresponding to different works of asian art
-//         //console.log(ids);
-        
-//         let arr = []; //going to put all the art info into this array first so it happens synchronously
-//         for (let i = 0; i < 500 && i*40+i < ids.length; i++) {
-//             const artResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + ids[i*40+i]);
-//             const art = await artResponse.json();
-//             if(art.primaryImageSmall != "" && art.artistDisplayName != "") {
-//                 let a = {id: art.objectID, image: art.primaryImageSmall, title: art.title, culture: art.culture, artist: art.artistDisplayName, medium: art.medium, date: art.objectDate};
-//                 console.log(a);
-//                 arr.push(a);
-//                 setCultures(prev => new Set(prev).add(art.culture));
-//             }
-//         }
-//         setList([...list, ...arr]); //then put the array arr into the state list so it happens all at
-//         console.log(arr.length);
-//         //console.log(cultures);
-//         //console.log(counter);
-//         //console.log(arr.length);
-//     }
-//     getAllArt().catch(console.error);
-
-//   }, []);
-
 
   const searchItems = (inputString) => {
     setSearchQuery(inputString);
@@ -85,6 +62,17 @@ function App() {
         <div className='whole-page'>
             <h1>Asian Art in the Metropolitan Museum of Art</h1>
             <h3>Randomly generated selection of {list.length} works of art</h3>
+            <div>
+                <BarChart data={testData} width={500} height={300}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="culture">
+                        <Label value="Artwork Cultures" offset={0} position="insideBottom" />
+                    </XAxis>
+                    <YAxis label={{ value: '# of artworks', angle: -90, position: 'insideLeft' }} />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#8884d8"/>
+                </BarChart>
+            </div>
             <h3>Search by keyword:</h3>
             <input type='text' placeholder='Search...' onChange={(inputString) => searchItems(inputString.target.value)}></input>
             <h3>Filter by culture:</h3>
