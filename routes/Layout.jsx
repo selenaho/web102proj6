@@ -17,7 +17,7 @@ const Layout = () => {
                 const artResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + ids[i*40+i]);
                 const art = await artResponse.json();
                 if(art.primaryImageSmall != "" && art.artistDisplayName != "") {
-                    let a = {id: art.objectID, image: art.primaryImageSmall, title: art.title, culture: art.culture, artist: art.artistDisplayName, medium: art.medium, date: art.objectDate};
+                    let a = {id: art.objectID, image: art.primaryImageSmall, title: art.title, culture: art.culture, artist: art.artistDisplayName, medium: art.medium, date: art.objectDate, type: art.classification};
                     console.log(a);
                     arr.push(a);
                     setCultures(prev => new Set(prev).add(art.culture));

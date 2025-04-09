@@ -8,7 +8,6 @@ function ArtInfo({key, image, title, artist, medium, culture, date, id}) {
             <td><Link to={`/artDetails/${id}`} key={id}>{title}</Link></td>
             <td>{artist}</td>
             <td>{medium}</td>
-            <td>{date}</td>
             <td>{culture}</td>
         </tr>
     );

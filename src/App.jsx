@@ -22,7 +22,77 @@ function App() {
     },
   ];
 
-  const {list, cultures} = useOutletContext();
+  const {list, cultures} = useOutletContext(); //getting these data values from Layout.jsx to save them so that when we go from the detailed view back to App.jsx the API calls don't need to be made again
+
+  //const [cultureBreakdown, setCultureBreakdown] = useState([]);
+  let chinaNum = 0;
+  let japanNum = 0;
+  let otherNum = 0;
+
+  for(let i = 0; i < list.length; i++) {
+    if(list[i].culture.toLowerCase() == "japan") {
+        japanNum++;
+    }
+    else if(list[i].culture.toLowerCase() == "china") {
+        chinaNum++;
+    }
+    else {
+        otherNum++;
+    }
+  }
+
+  const cultureData = [
+    {
+        culture: "China",
+        value: chinaNum,
+    },
+    {
+        culture: "Japan",
+        value: japanNum,
+    },
+    {
+        culture: "Other",
+        value: otherNum,
+    },
+  ];
+  //setCultureBreakdown(cultureData);
+
+  let printNum = 0;
+  let paintingNum = 0;
+  let ceramicsNum = 0;
+  let otherTypeNum = 0;
+  for(let i = 0; i < list.length; i++) {
+    if(list[i].type.toLowerCase() == "paintings") {
+        paintingNum++;
+    }
+    else if(list[i].type.toLowerCase() == "prints") {
+        printNum++;
+    }
+    else if(list[i].type.toLowerCase() == "ceramics") {
+        ceramicsNum++;
+    }
+    else {
+        otherTypeNum++;
+    }
+  }
+  const typeData = [
+    {
+        type: "Prints",
+        value: printNum,
+    },
+    {
+        type: "Paintings",
+        value: paintingNum,
+    },
+    {
+        type: "Ceramics",
+        value: ceramicsNum,
+    },
+    {
+        type: "Other",
+        value: otherTypeNum,
+    },
+  ];
 
   const searchItems = (inputString) => {
     setSearchQuery(inputString);
@@ -62,17 +132,24 @@ function App() {
         <div className='whole-page'>
             <h1>Asian Art in the Metropolitan Museum of Art</h1>
             <h3>Randomly generated selection of {list.length} works of art</h3>
-            <div>
-                <BarChart data={testData} width={500} height={300}>
+            <ResponsiveContainer height={250}>
+                <BarChart data={cultureData} width={600} height={350} margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
                     <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="culture">
-                        <Label value="Artwork Cultures" offset={0} position="insideBottom" />
-                    </XAxis>
+                    <XAxis dataKey="culture" />
                     <YAxis label={{ value: '# of artworks', angle: -90, position: 'insideLeft' }} />
                     <Tooltip />
                     <Bar dataKey="value" fill="#8884d8"/>
                 </BarChart>
-            </div>
+            </ResponsiveContainer>
+            <ResponsiveContainer height={250}>
+                <BarChart data={typeData} width={600} height={350} margin={{ top: 15, right: 30, left: 20, bottom: 5 }}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="type" />
+                    <YAxis label={{ value: '# per type', angle: -90, position: 'insideLeft' }} />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#8884d8"/>
+                </BarChart>
+            </ResponsiveContainer>
             <h3>Search by keyword:</h3>
             <input type='text' placeholder='Search...' onChange={(inputString) => searchItems(inputString.target.value)}></input>
             <h3>Filter by culture:</h3>
