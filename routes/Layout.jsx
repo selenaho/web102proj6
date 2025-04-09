@@ -1,11 +1,16 @@
 import { Outlet, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import App from "../src/App.jsx";
 
 const Layout = () => {
     const [list, setList] = useState([]);
     const [cultures, setCultures] = useState(new Set());
-    useEffect(() => {    
+    const hasRun = useRef(false); //to see if useEffect has run already or not
+    useEffect(() => {
+        console.log("Effect running...");
+        //below two lines are to handle useEffect running twice
+        if(hasRun.current) return;
+        hasRun.current = true;
         const getAllArt = async () => {
             const response = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=6");
             const json = await response.json();

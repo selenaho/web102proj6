@@ -1,8 +1,8 @@
-# Web Development Project 6 - *Name of App Here*
+# Web Development Project 6 - *Asian Art at the Met*
 
 Submitted by: **Selena Ho**
 
-This web app: **insert description**
+This web app: **displays information about the various works of asian art at the Met, including summary graphs and individual pages for a detailed view on each piece of art**
 
 Time spent: **6** hours spent in total
 
@@ -29,16 +29,12 @@ The following **optional** features are implemented:
 - [ ] The site allows users to toggle between different data visualizations
   - User should be able to use some mechanism to toggle between displaying and hiding visualizations 
 
-  
-The following **additional** features are implemented:
-
-* [ ] List anything else that you added to improve the site's functionality!
-
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/selenaho/web102proj6/blob/main/proj6.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ScreenToGif  
